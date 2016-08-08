@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qimpay.database.mapping.userinfo">
-    <select id="getAllUserInfo" parameterType="long" resultType="java.util.LinkedHashMap">
-        SELECT uname AS 账号,unick as 名称,case  active when 1 then '激活' else '冻结' end as '状态' FROM userinfo where role=#{roleid}
+    <select id="getAllUserInfo" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+        SELECT uname AS 账号,unick as 名称,case  active when 1 then '激活' else '冻结' end as '状态' FROM userinfo
+           where role=#{roleval} and merchantid=#{merchantid}
     </select>
     <select id="getUserInfoById" parameterType="long" resultMap="userInfoResult">
       SELECT * FROM userinfo WHERE id=#{id}
@@ -19,10 +20,11 @@
         <if test="upwd!=null">
             and upwd=#{upwd}
         </if>
+            and merchantid=#{merchantid}
         </where>
     </select>
     <select id="updateUserInfoPwd" parameterType="java.util.HashMap" >
-       update userinfo set upwd=#{upwd} <where> uname=#{uname} <if test="oldupwd!=null" > and upwd=#{oldupwd}</if></where>
+       update userinfo set upwd=#{upwd} <where> uname=#{uname} <if test="oldupwd!=null" > and upwd=#{oldupwd}</if> and merchantid=#{merchantid} </where>
     </select>
     <select id="updateUserInfoOpenid" parameterType="long" >
         update userinfo set openid=#{openid} WHERE id=#{uid}
@@ -33,5 +35,6 @@
         <result property="upwd" column="upwd" jdbcType="VARCHAR"/>
         <result property="unick" column="unick" jdbcType="VARCHAR"/>
         <result property="openid" column="openid" jdbcType="VARCHAR"/>
+        <result property="merchantid" column="merchantid" jdbcType="BIGINT"/>
     </resultMap>
 </mapper>

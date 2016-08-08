@@ -84,6 +84,7 @@ public class DetailAction extends AjaxActionSupport {
         if (! submchidstring.equals("'123'")) {
             param.put("submchlist", submchidstring);
         }
+        param.put("limitstr", "limit "+String.valueOf((currpagenum-1)*15)+",15");
         List<HashMap> orderInfo;
         float sum =0;
         float ratefee = 0;
@@ -100,7 +101,7 @@ public class DetailAction extends AjaxActionSupport {
             map.put("errorMessage","查无信息");
            // return AjaxActionComplete(map);
         }
-        List<HashMap> returnlist =  orderInfo.subList((currpagenum-1)*15,Math.min(currpagenum*15,orderInfo.size()));
+        List<HashMap> returnlist =orderInfo;//  orderInfo.subList((currpagenum-1)*15,Math.min(currpagenum*15,orderInfo.size()));
         Map map=new HashMap<>();
         map.put("totalcount",orderInfo.size());
         map.put("totalsum",sum);
@@ -213,11 +214,6 @@ public class DetailAction extends AjaxActionSupport {
     }
 
     public String Fetchstatistics() throws UnsupportedEncodingException {
-//        List<HashMap> orderInfo = null;
-//        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0) {
-//            orderInfo = OrderInfo.getOrderStatistics(Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
-//        }
-//        return  AjaxActionComplete(orderInfo);
         try{
         Map<Object, Object> param= new HashMap<>();
         param.put("merchantid", ProjectSettings.getId());

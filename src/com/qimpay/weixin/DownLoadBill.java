@@ -103,35 +103,5 @@ public class DownLoadBill {
         }
 
     }
-//    public ActionForward dsdbill() throws Exception {
-//        response.setContentType("text/text;charset=UTF-8");
-//        request.setCharacterEncoding("UTF-8");
-//        String rt = new String("");
-//        String datastr = new String(request.getParameter("datas")
-//                .getBytes("iso-8859-1"), "utf-8");
-//
-//
-//        SortedMap<String, String> packageParams = new TreeMap<String, String>();
-//        packageParams.put("appid", "wxbc6cb3102836e118");
-//        packageParams.put("mch_id", "1241847602");
-//        packageParams.put("nonce_str", "duizhangdan");
-//        packageParams.put("bill_date", datastr);//20151109
-//        packageParams.put("bill_type", "ALL");
-//        RequestHandler reqHandler = new RequestHandler(null, null);
-//        reqHandler.init("wxbc6cb3102836e118", "9778c54c04ff5d14f7f9c491badbc60b", "1241847602L124184760298765432100");
-//        String sign = reqHandler.createSign(packageParams);
-//        packageParams.put("sign", sign);
-//
-//        String xml  ="<xml>"+ (com.utils.Xmlutils.mapToXMLTest2((Map)packageParams)).toString()+"</xml>";
-//        String createOrderURL = "https://api.mch.weixin.qq.com/pay/downloadbill";
-//
-//
-//        String retrunstring = GetWxOrderno.getresult(createOrderURL, xml) ;
-//        System.out.println("...");
-//        Dbill dbill = new Dbill();
-//        dbill.insertdb(retrunstring);
-//        return  null;
-//    }
-
 
 }

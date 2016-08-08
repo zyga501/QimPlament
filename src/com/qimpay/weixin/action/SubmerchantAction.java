@@ -1,6 +1,7 @@
 package com.qimpay.weixin.action;
 
 import com.AjaxActionSupport;
+import com.framework.ProjectSettings;
 import com.framework.utils.Logger;
 import com.framework.utils.StringUtils;
 import com.qimpay.database.AllMerchant;
@@ -29,7 +30,7 @@ public class SubmerchantAction extends AjaxActionSupport {
         try {
             String submchid = getParameter("id").toString();
             Map<String, Object> param= new HashMap<>();
-            param.put("uname",submchid);
+            param.put("uname",submchid);//submchid
             if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
                 param.put("xid",Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
             else if (!("999").equals(getRequest().getSession().getAttribute("roleval").toString()))
@@ -42,6 +43,7 @@ public class SubmerchantAction extends AjaxActionSupport {
 
     public String FetchSubmerchant() throws UnsupportedEncodingException {
         Map<Object, Object> param= new HashMap<>();
+        param.put("merchantid",ProjectSettings.getId());
         if (null!=getParameter("item") && !getParameter("item").equals("")){
             if (StringUtils.isNumeric(getParameter("item").toString()))
                 param.put("submchid", getParameter("item"));
@@ -66,16 +68,17 @@ public class SubmerchantAction extends AjaxActionSupport {
         }
         allmerchantlist = AllMerchant.getweixinsubmerchantByUid(param);
 
-        List<HashMap> returnlist =  allmerchantlist.subList((currpagenum-1)*15,Math.min(currpagenum*15,allmerchantlist.size()));
+        //List<HashMap> returnlist =  allmerchantlist.subList((currpagenum-1)*15,Math.min(currpagenum*15,allmerchantlist.size()));
         Map map=new HashMap<>();
         map.put("totalcount",allmerchantlist.size());
-        map.put("pagecount",(allmerchantlist.size()+15-1)/15);
-        returnlist.add(0, (HashMap) map);
-        return  AjaxActionComplete(returnlist);
+        //map.put("pagecount",(allmerchantlist.size()+15-1)/15);
+        allmerchantlist.add(0, (HashMap) map);
+        return  AjaxActionComplete(allmerchantlist);
     }
 
     public String LinkMerchant() throws UnsupportedEncodingException {
         Map<Object, Object> param= new HashMap<>();
+        param.put("merchantid",ProjectSettings.getId());
         if (null!=getParameter("item") && !getParameter("item").equals("")){
             if (StringUtils.isNumeric(getParameter("item").toString()))
                 param.put("submchid", getParameter("item"));

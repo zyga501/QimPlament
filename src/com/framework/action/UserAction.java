@@ -1,8 +1,10 @@
 package com.framework.action;
 
 import com.AjaxActionSupport;
+import com.framework.ProjectSettings;
 import com.qimpay.database.MenuTree;
 import com.qimpay.database.UserInfo;
+import com.qimpay.database.weixin.MerchantInfo;
 import com.qimpay.database.weixin.WXUserInfo;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class UserAction extends AjaxActionSupport {
                 Map paramap = new HashMap();
                 paramap.put("uname", getParameter("uname").toString());
                 paramap.put("upwd", getParameter("upwd").toString());
+                paramap.put("merchantid",ProjectSettings.getId());
                 UserInfo userInfo = UserInfo.getUserInfoByAcount(paramap);
                 if (null != userInfo) {
                     if (userInfo.getActive()!=1){
@@ -61,7 +64,7 @@ public class UserAction extends AjaxActionSupport {
                     getRequest().getSession().setAttribute("role", userInfo.getRole() == 999 ? "管理员" : userInfo.getRole() == 1 ? "机构" : userInfo.getRole() == 2 ? "销售" : userInfo.getRole() == 3 ? "职员" : "未知");
                     return "gomainpage";
                 } else {
-                    loginErrorMessage = "账号密码，验证码有校验不通过";
+                    loginErrorMessage = "账号密码，验证码有校验不通过"+getParameter("uname").toString();
                     return LOGIN;
                 }
             }
@@ -107,6 +110,7 @@ public class UserAction extends AjaxActionSupport {
         if (getAttribute("roleval").equals(999)){
             param.put("upwd","123");
             param.put("uname",getParameter("salemanname"));
+            param.put("merchantid",(ProjectSettings.getId()));
            if ( UserInfo.updateUserInfoPwd(param)){
                return AjaxActionComplete(true);
            }
@@ -129,7 +133,10 @@ public class UserAction extends AjaxActionSupport {
     public String FetchRole(){
         Map map = new HashMap<>();
         if (null!=getParameter("roleval") && !getParameter("roleval").equals("")){
-            List<HashMap> userInfo = UserInfo.getAllUserInfo(Integer.parseInt(getParameter("roleval").toString()));
+            map.put("roleval",Integer.parseInt(getParameter("roleval").toString()));
+            map.put("merchantid",ProjectSettings.getId());
+            List<HashMap> userInfo = UserInfo.getAllUserInfo(map);
+            map.clear();
             map.put("totalcount",userInfo.size());
             userInfo.add(0, (HashMap) map);
             return AjaxActionComplete(userInfo);
@@ -144,6 +151,7 @@ public class UserAction extends AjaxActionSupport {
             String uname = getParameter("uname").toString();
             Map<String, Object> param=new HashMap<String, Object>();
             param.put("uname",uname);
+            param.put("merchantid",ProjectSettings.getId());
             userInfo = UserInfo.getUserInfoByAcount(param);
             if (null!=userInfo){
                 return USERINFOJSP;

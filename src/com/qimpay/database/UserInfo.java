@@ -21,9 +21,9 @@ public class UserInfo {
         return Database.Instance().selectOne(statement,param);
     }
 
-    public static List<HashMap> getAllUserInfo(long roleid) {
+    public static List<HashMap> getAllUserInfo(Map  param) {
         String statement = "com.qimpay.database.mapping.userinfo.getAllUserInfo";
-        return Database.Instance().selectList(statement,roleid);
+        return Database.Instance().selectList(statement,param);
     }
 
     public static boolean updateUserInfoPwd(Map param) {
@@ -92,6 +92,14 @@ public class UserInfo {
         this.openid_ = openid_;
     }
 
+    public long getMerchantid() {
+        return merchantid_;
+    }
+
+    public void setMerchantid(long merchantid_) {
+        this.merchantid_ = merchantid_;
+    }
+
     private long id_;
     private String uname_;
     private String upwd_;
@@ -99,4 +107,5 @@ public class UserInfo {
     private int role_;
     private int active_;
     private String openid_;
+    private long merchantid_;
 }
