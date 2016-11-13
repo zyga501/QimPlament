@@ -16,8 +16,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest servletRequest = (HttpServletRequest)request;
         HttpServletResponse servletResponse = (HttpServletResponse)response;
         HttpSession session = servletRequest.getSession();
-
-        String path = servletRequest.getRequestURI();
+        String path = servletRequest.getRequestURI().toLowerCase();
         if(path.indexOf("/css") > -1
                 || path.indexOf("/fonts") > -1
                 || path.indexOf("/img") > -1
@@ -25,14 +24,20 @@ public class LoginFilter implements Filter {
                 || path.indexOf("/js") > -1
                 || path.indexOf("/skin") > -1
                 || path.indexOf("/welcome") > -1
-                || path.indexOf("/login.jsp") > -1) {
+                || path.indexOf("/khzlgl.jsp") > -1
+                || path.indexOf("/wxlogin.jsp") > -1
+                || path.indexOf("/rtopenid.jsp") > -1
+                || path.indexOf("/goodspay") > -1
+                || path.indexOf("/login.jsp") > -1)
+        {
             chain.doFilter(servletRequest, servletResponse);
+            return;
         }
-        else  if (session.getAttribute("uid") != null) {
+        if (session.getAttribute("uid") != null) {
             chain.doFilter(servletRequest, servletResponse);
         }
         else {
-            servletResponse.sendRedirect("./login.jsp");
+            servletResponse.sendRedirect("../login.jsp");
         }
     }
 

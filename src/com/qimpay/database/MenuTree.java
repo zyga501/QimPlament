@@ -38,7 +38,6 @@ public class MenuTree {
         this.labelico_ = labelico_;
     }
 
-
     public long getId() {
         return id_;
     }

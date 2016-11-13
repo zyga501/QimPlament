@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class UserInfo {
 
-    public static UserInfo getUserInfoById(String UId) {
+    public static UserInfo getUserInfoById(Long UId) {
         String statement = "com.qimpay.database.mapping.userinfo.getUserInfoById";
         return Database.Instance().selectOne(statement, UId);
     }
@@ -28,6 +28,11 @@ public class UserInfo {
 
     public static boolean updateUserInfoPwd(Map param) {
         String statement = "com.qimpay.database.mapping.userinfo.updateUserInfoPwd";
+        return Database.Instance().update(statement, param) == 1;
+    }
+
+    public static boolean updateUserInfoOpenid(Map param) {
+        String statement = "com.qimpay.database.mapping.userinfo.updateUserInfoOpenid";
         return Database.Instance().update(statement, param) == 1;
     }
 

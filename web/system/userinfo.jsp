@@ -13,6 +13,7 @@
                     <h3>
                         编号:${userInfo.uname}
                     </h3>
+                    <div id="userqrcode">12</div>
                 </div>
                 <div class="row  m-b-md">
                     <div class="col-sm-4">
@@ -36,7 +37,19 @@
 <script src="<%=request.getContextPath()%>/js/content.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/laypage.js"></script>
 <script src="<%=request.getContextPath()%>/js/layer.js"></script>
+<script src="<%=request.getContextPath()%>/js/qrcode.js"></script>
 <script>
+    $(function(){
+        $("#userqrcode").html("");
+        {
+            var qr = qrcode(10, 'H');
+            qr.addData("http://www.jeanhk.top<%=request.getContextPath()%>/User!bindwx?tuid="+${userInfo.id});
+            qr.make();
+            var dom=document.createElement('DIV');
+            dom.innerHTML = qr.createImgTag();
+            $("#userqrcode")[0].appendChild(dom);
+        }
+    })
     function initpwd(param) {
         $.ajax({
             type: 'post',

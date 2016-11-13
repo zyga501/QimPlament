@@ -43,7 +43,7 @@
 <body style="background-color: #444444" align="center">
 <div style="width:1190px;margin-left: auto;margin-right: auto;">
     <h1>企盟科技业务中心<sup>2016</sup></h1>
-    <h2>Work Center Of qimeng Technology</h2>
+    <h2>Work Center Of Qimeng Technology</h2>
 </div>
 <div class="visual" style="width:1190px;margin-left: auto;margin-right: auto;">
     <div class="banner">

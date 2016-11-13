@@ -2,15 +2,16 @@ package com.framework.action;
 
 import com.AjaxActionSupport;
 import com.framework.ProjectSettings;
+import com.framework.utils.Logger;
+import com.framework.utils.OpenId;
 import com.qimpay.database.MenuTree;
 import com.qimpay.database.UserInfo;
 import com.qimpay.database.weixin.MerchantInfo;
 import com.qimpay.database.weixin.WXUserInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.*;
 
 public class UserAction extends AjaxActionSupport {
     private static String  MAINPAGE ="mainpage";
@@ -161,5 +162,61 @@ public class UserAction extends AjaxActionSupport {
         catch (Exception e){
             return AjaxActionComplete("page404");
         }
+    }
+
+
+    public void bindwx() throws IOException {
+        String subMerchantId = getParameter("tuid").toString();
+        UserInfo userInfo = UserInfo.getUserInfoById(Long.parseLong(subMerchantId));
+        if (userInfo != null) {
+            MerchantInfo merchantInfo = MerchantInfo.getMerchantInfoById(ProjectSettings.getId());
+            if (merchantInfo != null) {
+//                String redirect_uri = getRequest().getRequestURL().toString();
+//                redirect_uri = redirect_uri.substring(0, redirect_uri.lastIndexOf('/'));
+//                redirect_uri = redirect_uri.substring(0, redirect_uri.lastIndexOf('/') + 1) + "/weixin/rtopenid.jsp";
+                String redirect_uri =  getRequest().getScheme()+"://" + getRequest().getServerName() + getRequest().getContextPath() + "/weixin/rtopenid.jsp";
+                String perPayUri = String.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" +
+                                "%s&redirect_uri=%s&response_type=code&scope=snsapi_base&state=%s#wechat_redirect",
+                        merchantInfo.getAppid(), redirect_uri, subMerchantId);
+                getResponse().sendRedirect(perPayUri);
+                return;
+            }
+        }
+    }
+
+    public String updateWeixinIdById() throws Exception {
+        String subMerchantId = getParameter("id").toString();
+        String code = getParameter("code").toString();
+        if (subMerchantId.isEmpty() || code.isEmpty()) {
+            return AjaxActionComplete(false);
+        }
+        MerchantInfo merchantInfo = MerchantInfo.getMerchantInfoById((ProjectSettings.getId()));
+        String appid =  merchantInfo.getAppid();
+        String appsecret =  merchantInfo.getAppsecret();
+        System.out.println("code="+ getParameter("code").toString());
+        System.out.println("appid="+appid);
+        System.out.println("appsecret="+appsecret);
+        OpenId openId = new OpenId(appid, appsecret, getParameter("code").toString());
+        if (!openId.getRequest()) {
+        }
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("uid",subMerchantId);
+        resultMap.put("openid","");
+        UserInfo.updateUserInfoOpenid(resultMap);
+        resultMap.put("openid",openId.getOpenId());
+        if (UserInfo.updateUserInfoOpenid(resultMap)){
+            return AjaxActionComplete(true);
+        }
+        else
+        return AjaxActionComplete(false) ;
+    }
+
+    public String getdt(){
+        Date date = new Date(System.currentTimeMillis());
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM,Locale.CHINA);
+        String dt = df.format(date);
+        Map  map=new HashMap<>();
+        map.put("new",dt);
+        return   AjaxActionComplete(map);
     }
 }

@@ -42,8 +42,14 @@
         <action name="Mainpage" class="com.framework.action.UserAction" method="Initmainpage">
             <result name="mainpagejsp">./mainpage.jsp</result>
         </action>
+        <action name="Khzlgl!*" class="com.qimpay.OA.action.KhzlglAction" method="{1}">
+            <result name="mainpagejsp">./mainpage.jsp</result>
+            <result name="OAkhzlgl">./OA/khzlgl.jsp</result>
+        </action>
         <action name="Oauth!*" class="com.framework.action.OauthLoginAction" method="{1}">
             <result name="gomainpage" type="redirectAction">Mainpage</result>
+        </action>
+        <action name="G!*" class="com.qimpay.OA.action.GoodsPayAction" method="{1}">
         </action>
     </package>
     <include file="com/qimpay/weixin/struts-weixin.xml" />

@@ -19,12 +19,12 @@ public class MerchantInfo {
     }
 
     public static MerchantInfo getMerchantInfoById(long id) {
-        String statement = "com.qimpay.database.weixin.mapping.merchantInfo.getMerchantInfoById";
+        String statement = "com.qimpay.database.mapping.weixin.merchantInfo.getMerchantInfoById";
         return WxDatabase.Instance().selectOne(statement, id);
     }
 
     public static MerchantInfo getMerchantInfoByAppId(String appid) {
-        String statement = "com.qimpay.database.weixin.mapping.merchantInfo.getMerchantInfoByAppId";
+        String statement = "com.qimpay.database.mapping.weixin.merchantInfo.getMerchantInfoByAppId";
         return WxDatabase.Instance().selectOne(statement, appid);
     }
 

@@ -1,11 +1,12 @@
 package com.framework.utils;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class StringUtils {
     public static String convertNullableString(Object object) {
         if (object == null) {
-            return new String();
+            return new String("");
         }
 
         return object.toString();
@@ -16,7 +17,14 @@ public class StringUtils {
             return defaultValue;
         }
 
-        return object.toString();
+        return String.valueOf(object);
+    }
+
+    public static Object convertEmptyString(String object) {
+        if (object.equals("")) {
+            return null;
+        }
+        return object;
     }
 
     public static String generateRandomString(int length) {
@@ -37,4 +45,5 @@ public class StringUtils {
         }
         return true;
     }
+
 }

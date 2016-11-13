@@ -5,4 +5,5 @@
     <name>qimplatment</name>
     <serverAddress>127.0.0.1</serverAddress>
     <idWorkerSeed>1</idWorkerSeed>
+    <Picpath>D:\\QiLian\\</Picpath>
 </project>

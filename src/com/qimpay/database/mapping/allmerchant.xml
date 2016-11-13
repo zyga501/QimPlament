@@ -18,8 +18,8 @@
         SELECT c.name as 商户,a.subid 商户号 FROM weixinpayment.submerchantinfo a,platment.submerchant b,merchantinfo.submerchant c,platment.userinfo d
         <where>
             a.subid=b.submchid and c.id=a.id and d.id=b.xid
-            <if test="merhcantid != null">
-                and d.merchantid=#{merhcantid}
+            <if test="merchantid != null">
+                and d.merchantid=#{merchantid}
             </if>
             <if test="submchid != null">
                 and  b.submchid like CONCAT('%','${submchid}','%' )

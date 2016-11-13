@@ -26,7 +26,7 @@
     <select id="updateUserInfoPwd" parameterType="java.util.HashMap" >
        update userinfo set upwd=#{upwd} <where> uname=#{uname} <if test="oldupwd!=null" > and upwd=#{oldupwd}</if> and merchantid=#{merchantid} </where>
     </select>
-    <select id="updateUserInfoOpenid" parameterType="long" >
+    <select id="updateUserInfoOpenid" parameterType="java.util.HashMap" >
         update userinfo set openid=#{openid} WHERE id=#{uid}
     </select>
     <resultMap type="com.qimpay.database.UserInfo" id="userInfoResult">

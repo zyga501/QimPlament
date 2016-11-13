@@ -69,5 +69,19 @@ public class ProjectSettings {
         return 0;
     }
 
+
+    public static String getPicpath() {
+        try {
+            if (projectSettings_ != null && projectSettings_.get("Picpath") != null) {
+                return (projectSettings_.get("Picpath").toString());
+            }
+        }
+        catch (NumberFormatException exception) {
+
+        }
+
+        return "";
+    }
+
     private static Map<String, Object> projectSettings_;
 }

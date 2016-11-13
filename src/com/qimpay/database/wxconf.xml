@@ -24,7 +24,7 @@
 
     <mappers>
         <mapper resource="com/qimpay/database/mapping/weixin/orderInfo.xml" />
-        <mapper resource="com/qimpay/database/mapping/weixin/MerchantInfo.xml" />
+        <mapper resource="com/qimpay/database/mapping/weixin/merchantInfo.xml" />
         <mapper resource="com/qimpay/database/mapping/weixin/wxbill.xml" />
         <mapper resource="com/qimpay/database/mapping/weixin/wxuserinfo.xml" />
     </mappers>

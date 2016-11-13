@@ -31,7 +31,7 @@ public class SubmerchantAction extends AjaxActionSupport {
             String submchid = getParameter("id").toString();
             Map<String, Object> param= new HashMap<>();
             param.put("uname",submchid);//submchid
-            if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+            if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
                 param.put("xid",Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
             else if (!("999").equals(getRequest().getSession().getAttribute("roleval").toString()))
                 return AjaxActionComplete(false);
@@ -51,7 +51,7 @@ public class SubmerchantAction extends AjaxActionSupport {
                 param.put("storename", java.net.URLDecoder.decode(java.net.URLDecoder.decode(
                     getParameter("item").toString(), "UTF-8"),"UTF-8"));
         }
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             param.put("uid",Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
         if ((null!=getParameter("salemanid")) && (!getParameter("salemanid").toString().equals("")))
             param.put("salemanid",Long.parseLong(getParameter("salemanid").toString()));
@@ -86,7 +86,7 @@ public class SubmerchantAction extends AjaxActionSupport {
                 param.put("storename", java.net.URLDecoder.decode(java.net.URLDecoder.decode(
                         getParameter("item").toString(), "UTF-8"),"UTF-8"));
         }
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             return AjaxActionComplete("page404");
         List<HashMap> allmerchantlist  = AllMerchant.getAllweixinsubmerchant(param);
 //        Map map=new HashMap<>();

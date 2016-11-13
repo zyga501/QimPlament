@@ -72,7 +72,7 @@ public class DetailAction extends AjaxActionSupport {
         }
         List<Long> submchidlist = null;
         String submchidstring = "'123'";
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             submchidlist = UserInfo.getsubmchidlist(Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
         else if (getRequest().getSession().getAttribute("roleval").toString().equals("-1"))
             submchidstring = getRequest().getSession().getAttribute("uname").toString();
@@ -152,7 +152,7 @@ public class DetailAction extends AjaxActionSupport {
         }
         List<Long> submchidlist = null;
         String submchidstring = "'123'";
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             submchidlist = UserInfo.getsubmchidlist(Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
         else if (getRequest().getSession().getAttribute("roleval").toString().equals("-1"))
             submchidstring = getRequest().getSession().getAttribute("uname").toString();
@@ -239,7 +239,7 @@ public class DetailAction extends AjaxActionSupport {
                     currpagenum = Integer.parseInt(getParameter("currpagenum").toString());}
         }
         List<Long> submchidlist = null;
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             submchidlist = UserInfo.getsubmchidlist(Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
         String submchidstring = "'123'";
         if (null!=submchidlist){
@@ -298,7 +298,7 @@ public class DetailAction extends AjaxActionSupport {
         }
         List<Long> submchidlist = null;
         String submchidstring = "'123'";
-        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>0)
+        if (("1,2").indexOf(getRequest().getSession().getAttribute("roleval").toString())>=0)
             submchidlist = UserInfo.getsubmchidlist(Long.parseLong(getRequest().getSession().getAttribute("uid").toString()));
         else if (getRequest().getSession().getAttribute("roleval").toString().equals("-1"))
             submchidstring = getRequest().getSession().getAttribute("uname").toString();

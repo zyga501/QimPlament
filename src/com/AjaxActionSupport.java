@@ -20,7 +20,14 @@ public class AjaxActionSupport extends ActionSupport {
     private ArrayList<String> skipAction = new ArrayList<String>() {{
         add("user!login");
         add("user!logout");
+        add("user!bindwx");
+        add("user!getdt");
+        add("khzlgl!login");
+        add("khzlgl!fetchopenid");
         add("auth!generateverifycode");
+        add("g!fetchgoodsinfo");
+        add("g!goodsinfo");
+        add("g!goodspaypic");
     }};
 
     public HttpServletResponse getResponse() {
@@ -54,9 +61,10 @@ public class AjaxActionSupport extends ActionSupport {
         String actionName = context.getName();
         if (getAttribute("uid").isEmpty() && !skipAction.contains(actionName.toLowerCase())) {
             try {
-                getResponse().sendRedirect("./login.jsp");
-                throw new Exception();
+                System.out.println("url:"+getRequest().getRequestURL());
+                getResponse().sendRedirect(getRequest().getScheme()+"://" + getRequest().getServerName() + getRequest().getContextPath() +"/login.jsp");
             } catch (Exception e) {
+                System.out.println(actionName);
                 e.printStackTrace();
             }
         }
@@ -101,6 +109,11 @@ public class AjaxActionSupport extends ActionSupport {
         return AJAXACTIONCOMPLETED;
     }
 
+//    public String AjaxActionComplete( Object resultObj) {
+//        ajaxActionResult_ = JSONObject.fromObject(resultObj).toString();
+//        return AJAXACTIONCOMPLETED;
+//    }
+//
     public String AjaxActionComplete(List resultList) {
         ajaxActionResult_ = JSONArray.fromObject(resultList).toString();
         return AJAXACTIONCOMPLETED;
