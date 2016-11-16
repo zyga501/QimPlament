@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qimpay.database.mapping.goodspay">
+    <select id="getAllGoodsPay"   resultType="java.util.LinkedHashMap">
+        SELECT id,rname,cid,phone,lefuno,posno,lefuhandno,ryxposno,wxmch,qimhandno,zhhhandno,hefuhandno,sesame,cartype,highpay,ok FROM goodspay  where (LENGTH(pic1)>0)
+    </select>
+    <select id="getGoodsPayById" parameterType="long" resultMap="goodsPayResult">
+      SELECT * FROM goodspay WHERE id=#{id} ORDEr by ok
+    </select>
+    <select id="getGoodsPaypic" parameterType="long" resultMap="goodsPayResult">
+        SELECT pic1,pic2,pic3 FROM goodspay WHERE id=#{id}
+    </select>
+    <select id="getGoodsPayBymap" parameterType="com.qimpay.database.GoodsPay"   resultMap="goodsPayResult">
+        SELECT * FROM goodspay
+        where  cid=#{cid}
+    </select>
+    <insert id="insertGoodsPay" parameterType="com.qimpay.database.GoodsPay" >
+       insert into goodspay (rname,cid,phone,lefuno,posno,lefuhandno,ryxposno,wxmch,qimhandno,zhhhandno,hefuhandno,ccregphone,sesame,cartype,highpay)
+       values(#{rname},#{cid},#{phone},#{lefuno},#{posno},#{lefuhandno},#{ryxposno},#{wxmch},#{qimhandno},#{zhhhandno},#{hefuhandno},#{ccregphone},#{sesame},#{cartype},#{highpay})
+    </insert>
+    <update id="updateGoodsPay" parameterType="com.qimpay.database.GoodsPay" >
+        update goodspay set rname=#{rname},cid=#{cid},phone=#{phone},lefuno=#{lefuno},ccregphone=#{ccregphone},
+        posno=#{posno},lefuhandno=#{lefuhandno},ryxposno=#{ryxposno},wxmch=#{wxmch},qimhandno=#{qimhandno},zhhhandno=#{zhhhandno},hefuhandno=#{hefuhandno},
+        sesame=#{sesame},cartype=#{cartype},highpay=#{highpay} where  id=#{id} and ok=0
+    </update>
+    <update id="updateGoodsok" parameterType="com.qimpay.database.GoodsPay" >
+        update goodspay set ok=#{ok},highpay=#{highpay} where  id=#{id}  and ok=0
+    </update>
+    <update id="updateGoodslistok" parameterType="java.util.HashMap" >
+        update goodspay set ok=#{ok}  where  id IN (${id})
+    </update>
+    <update id="updateGoodsPayPic1" parameterType="com.qimpay.database.GoodsPay" >
+        update goodspay set pic1=#{pic1} where  id=#{id}  and ok=0
+    </update>
+    <update id="updateGoodsPayPic2" parameterType="com.qimpay.database.GoodsPay" >
+        update goodspay set pic2=#{pic2} where  id=#{id}  and ok=0
+    </update>
+    <update id="updateGoodsPayPic3" parameterType="com.qimpay.database.GoodsPay" >
+        update goodspay set pic3=#{pic3} where  id=#{id}  and ok=0
+    </update>
+    <resultMap type="com.qimpay.database.GoodsPay" id="goodsPayResult">
+        <id property="id" column="id" jdbcType="BIGINT" />
+        <result property="rname" column="rname" jdbcType="VARCHAR"/>
+        <result property="cid" column="cid" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="lefuno" column="lefuno" jdbcType="VARCHAR"/>
+        <result property="posno" column="posno" jdbcType="VARCHAR"/>
+        <result property="cartype" column="cartype" jdbcType="VARCHAR"/>
+        <result property="lefuhandno" column="lefuhandno" jdbcType="VARCHAR"/>
+        <result property="ryxposno" column="ryxposno" jdbcType="VARCHAR"/>
+        <result property="wxmch" column="wxmch" jdbcType="VARCHAR"/>
+        <result property="qimhandno" column="qimhandno" jdbcType="VARCHAR"/>
+        <result property="zhhhandno" column="zhhhandno" jdbcType="VARCHAR"/>
+        <result property="hefuhandno" column="hefuhandno" jdbcType="VARCHAR"/>
+        <result property="ccregphone" column="ccregphone" jdbcType="VARCHAR"/>
+        <result property="sesame" column="sesame" jdbcType="VARCHAR"/>
+        <result property="cartype" column="cartype" jdbcType="VARCHAR"/>
+        <result property="highpay" column="highpay" jdbcType="BIGINT"/>
+        <result property="pic1" column="pic1" jdbcType="BLOB"/>
+        <result property="pic2" column="pic2" jdbcType="BLOB"/>
+        <result property="pic3" column="pic3" jdbcType="BLOB"/>
+        <result property="ok" column="ok" jdbcType="BIGINT"/>
+    </resultMap>
+</mapper>

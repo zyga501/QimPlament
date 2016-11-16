@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qimpay.database.mapping.khzl">
+    <select id="getkhzlb" parameterType="java.util.HashMap" resultMap="khzlResult">
+        SELECT * FROM khzlb
+           where cardno=#{cardno}
+    </select>
+
+    <insert id="insertkhzlb" parameterType="java.util.HashMap"  >
+         insert into  khzlb (frxm ,zjhm ,address ,expirydate ,fzjg ,cardno ,cardbank ,mobilenum ,hy ,storenum ,
+            rate ,area ,tzero ,postype ,wyuserid) VALUES (#{frxm},#{zjhm},#{address},#{expirydate},#{fzjg},#{cardno},#{cardbank},
+            #{mobilenum},#{hy},#{storenum},#{rate},#{area},#{tzero},#{postype},#{wyuserid})
+    </insert>
+
+    <insert id="insertkhzltab" parameterType="java.util.HashMap"  >
+        insert into  khzltab (khid,zlname) VALUES (#{khid},#{zlname})
+    </insert>
+
+    <resultMap type="com.qimpay.database.Khzl" id="khzlResult">
+        <id property="khid" column="khid" jdbcType="BIGINT" />
+        <result property="frxm" column="frxm" jdbcType="VARCHAR" />
+        <result property="zjhm" column="zjhm" jdbcType="VARCHAR" />
+        <result property="address" column="address" jdbcType="VARCHAR" />
+        <result property="expirydate" column="expirydate" jdbcType="DATE" />
+        <result property="fzjg" column="fzjg" jdbcType="VARCHAR" />
+        <result property="cardno" column="cardno" jdbcType="VARCHAR" />
+        <result property="cardbank" column="cardbank" jdbcType="VARCHAR" />
+        <result property="mobilenum" column="mobilenum" jdbcType="VARCHAR" />
+        <result property="hy" column="hy" jdbcType="VARCHAR" />
+        <result property="storenum" column="storenum" jdbcType="BIGINT" />
+        <result property="rate" column="rate" jdbcType="FLOAT" />
+        <result property="area" column="area" jdbcType="VARCHAR" />
+        <result property="tzero" column="tzero" jdbcType="BIGINT" />
+        <result property="postype" column="postype" jdbcType="VARCHAR" />
+        <result property="wyuserid" column="wyuserid" jdbcType="BIGINT" />
+    </resultMap>
+</mapper>

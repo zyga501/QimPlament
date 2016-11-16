@@ -27,7 +27,7 @@ public class AjaxActionSupport extends ActionSupport {
         add("auth!generateverifycode");
         add("g!fetchgoodsinfo");
         add("g!goodsinfo");
-        add("g!goodspaypic");
+        add("g!getgoodspaypic");
     }};
 
     public HttpServletResponse getResponse() {
