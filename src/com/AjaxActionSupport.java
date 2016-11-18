@@ -28,6 +28,7 @@ public class AjaxActionSupport extends ActionSupport {
         add("g!fetchgoodsinfo");
         add("g!goodsinfo");
         add("g!getgoodspaypic");
+        add("g!goodspaypic");
     }};
 
     public HttpServletResponse getResponse() {

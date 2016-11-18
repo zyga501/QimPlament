@@ -120,10 +120,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="highpay" class="col-sm-7 control-label"></label>
-
-            <div class="col-sm-1">
-                <button type="button" class="btn btn-sm btn-primary" onclick="nt()">下一步</button>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-sm btn-primary form-control" onclick="nt()">下一步</button>
             </div>
         </div>
     </div>
@@ -212,7 +210,6 @@
         uploadUrl: '<%=request.getContextPath()%>/G!goodsPaypic', // you must set a valid URL here else you will get an error
         allowedFileExtensions: ['jpg', 'png', 'gif'],
         overwriteInitial: false,
-        maxFileSize: 20000,
         maxFilesNum:3,
         dropZoneEnabled: false,
         showCaption: false,
@@ -233,8 +230,9 @@
                         title: "提示",
                 btn:["确定"]
                     },function() {
-                        window.close();
-                        WeixinJSBridge.call('closeWindow');
+//                        window.close();
+//                        WeixinJSBridge.call('closeWindow');
+                        window.location.href = "<%=request.getContextPath()%>/goodspay/goodssign.jsp";
                     }
             );
         }

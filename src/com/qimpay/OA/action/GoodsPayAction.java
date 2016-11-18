@@ -62,7 +62,7 @@ public class GoodsPayAction extends AjaxActionSupport {
         Map m = new HashMap<>();
         if (cl!=null ) {
             if (cl.getOk()==1)
-                m.put("msg","恭喜你！您的额度是：<b>"+ cl.getHighpay()+"</b><br>联系客服:40012345567或扫扫二维码，即刻放款。<br><center><img style='width:160px;' src='../img/goodsEWM.jpg'/></center>");
+                m.put("msg","恭喜你！您的额度是：<b>"+ cl.getHighpay()+"</b><br>联系客服:40012345567或扫扫二维码，即刻放款。<br><center><img style='height:160px;' src='../img/goodsEWM.jpg'/></center>");
             else if (cl.getOk()==2)
                 m.put("msg","审核未通过");
             else

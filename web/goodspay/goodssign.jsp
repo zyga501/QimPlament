@@ -58,7 +58,7 @@
                     title: "审核结果"
                 }, function () {
                     if (json.resultCode == "Failed")
-                        window.location.href = "<%=request.getContextPath()%>/goodspay/goodspay.jsp?phone=" + $("#phone").val() + "&cid=" + $('#cid').val();
+                        window.location.href = "<%=request.getContextPath()%>/goodspay/goodspay.jsp?cid=" + $('#cid').val();
                     else
                         layer.closeAll();
                 })

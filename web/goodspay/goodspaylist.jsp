@@ -21,12 +21,12 @@
                 <th  data-field="rname" data-sortable="true">姓名</th><th  data-field="phone"  data-sortable="true" >手机号</th>
             <th  data-field="cid">身份证</th><th  data-field="lefuno">乐富序列号</th>
             <th  data-field="posno">POS机流水</th>
-                <th  data-field="lefuhandno">乐富手刷序列号</th>
-                <th  data-field="hefuhandno">和付手刷序列号</th>
-                <th  data-field="qimhandno">企盟手刷序列号</th>
-                <th  data-field="zhhhandno">中汇掌富宝序列号</th>
-                <th  data-field="ccregphone">CC卡注册手机号</th>
-                <th  data-field="ryxposno">瑞银信POS序列号</th>
+                <th  data-field="lefuhandno" data-formatter="urlFormatter">乐富手刷序列号</th>
+                <th  data-field="hefuhandno" data-formatter="urlFormatter">和付手刷序列号</th>
+                <th  data-field="qimhandno" data-formatter="urlFormatter">企盟手刷序列号</th>
+                <th  data-field="zhhhandno" data-formatter="urlFormatter">中汇掌富宝序列号</th>
+                <th  data-field="ccregphone" data-formatter="urlFormatter">CC卡注册手机号</th>
+                <th  data-field="ryxposno" data-formatter="urlFormatter">瑞银信POS序列号</th>
                 <th  data-field="wxmch">微信商户号</th><th  data-field="sesame">芝麻分</th>
             <th data-field="cartype">汽车类型</th><th data-field="highpay">额度</th><th data-field="ok"  data-formatter="format_ok">是否审核</th></tr></thead>
         </table>
@@ -41,6 +41,11 @@
 <script>
     function indexFormatter(value, row, index) {
         return index+1+"<a href='#'>[查看图片]</a>";
+    }
+    function urlFormatter(value, row, index) {
+        if (value!=undefined)
+        return "<a href='http://www.baidu.com'>"+value+"</a>";
+        else return "";
     }
 
     function format_ok(value, row, index) {
